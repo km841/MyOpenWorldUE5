@@ -16,7 +16,8 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	SetActorLocation(FVector(0.f, 0.f, 50.f));
+	SetActorRotation(FRotator(0.f, 45.f, 0.f));
 	UE_LOG(LogTemp, Warning, TEXT("Begin Play called!"));
 
 	UWorld* World = GetWorld();
@@ -28,6 +29,8 @@ void AItem::BeginPlay()
 		DrawDebugLine(World, Location, Location + Direction * 100.f, FColor::Red, true, -1.f, 0, 1.f);
 		DrawDebugPoint(World, Location, 15.f, FColor::Red, true, -1.f, 0);
 	}
+
+	
 }
 
 // Called every frame
