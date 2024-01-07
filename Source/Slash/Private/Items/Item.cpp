@@ -16,19 +16,19 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorLocation(FVector(0.f, 0.f, 50.f));
+	SetActorLocation(FVector(0.f, 50.f, 50.f));
 	SetActorRotation(FRotator(0.f, 45.f, 0.f));
 	UE_LOG(LogTemp, Warning, TEXT("Begin Play called!"));
 
-	UWorld* World = GetWorld();
-	if (nullptr != World)
-	{
-		FVector Location = GetActorLocation();
-		FVector Direction = GetActorForwardVector();
-		DrawDebugSphere(World, Location, 25.f, 24, FColor::Red, false, 30.f);
-		DrawDebugLine(World, Location, Location + Direction * 100.f, FColor::Red, true, -1.f, 0, 1.f);
-		DrawDebugPoint(World, Location, 15.f, FColor::Red, true, -1.f, 0);
-	}
+	//UWorld* World = GetWorld();
+	//if (nullptr != World)
+	//{
+	//	FVector Location = GetActorLocation();
+	//	FVector Direction = GetActorForwardVector();
+	//	DrawDebugSphere(World, Location, 25.f, 24, FColor::Red, false, 30.f);
+	//	DrawDebugLine(World, Location, Location + Direction * 100.f, FColor::Red, true, -1.f, 0, 1.f);
+	//	DrawDebugPoint(World, Location, 15.f, FColor::Red, true, -1.f, 0);
+	//}
 
 	
 }
@@ -45,6 +45,21 @@ void AItem::Tick(float DeltaTime)
 		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, Message);
 	}
 
+
+	const float MovementRate = 50.f;
+	const float RotationRate = 45.f;
+	AddActorWorldOffset(FVector(MovementRate * DeltaTime, 0.f, 0.f));
+	AddActorWorldRotation(FRotator(0.f, RotationRate * DeltaTime, 0.f));
+
+	UWorld* World = GetWorld();
+	if (nullptr != World)
+	{
+		FVector Location = GetActorLocation();
+		FVector Direction = GetActorForwardVector();
+		DrawDebugSphere(World, Location, 25.f, 24, FColor::Red, false);
+		DrawDebugLine(World, Location, Location + Direction * 100.f, FColor::Red, false, -1.f, 0, 1.f);
+		DrawDebugPoint(World, Location, 15.f, FColor::Red, false, -1.f, 0);
+	}
 	//UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime);
 }
 
