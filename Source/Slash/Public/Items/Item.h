@@ -25,10 +25,16 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sin Parameters")
-	float Amplitude = 0.25f;
+	float Amplitude;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Sin Parameters")
-	float TimeConstant = 5.f;
+	float TimeConstant;
+
+	UFUNCTION(BlueprintPure)
+	float TransformedSin();
+
+	UFUNCTION(BlueprintPure)
+	float TransformedCos();
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

@@ -16,8 +16,8 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorLocation(FVector(0.f, 50.f, 50.f));
-	SetActorRotation(FRotator(0.f, 45.f, 0.f));
+	//SetActorLocation(FVector(0.f, 50.f, 50.f));
+	//SetActorRotation(FRotator(0.f, 45.f, 0.f));
 	UE_LOG(LogTemp, Warning, TEXT("Begin Play called!"));
 
 	//UWorld* World = GetWorld();
@@ -40,9 +40,9 @@ void AItem::Tick(float DeltaTime)
 
 	RunningTime += DeltaTime;
 	
-	float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant);
+	//float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant);
 
-	AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
+	//AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
 
 
 
@@ -58,3 +58,12 @@ void AItem::Tick(float DeltaTime)
 	UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime);
 }
 
+float AItem::TransformedSin()
+{
+	return Amplitude * FMath::Sin(RunningTime * TimeConstant);
+}
+
+float AItem::TransformedCos()
+{
+	return Amplitude * FMath::Cos(RunningTime * TimeConstant);
+}
