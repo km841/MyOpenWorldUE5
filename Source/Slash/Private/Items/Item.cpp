@@ -9,7 +9,8 @@ AItem::AItem()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMeshComponent"));
+	RootComponent = ItemMesh;
 }
 
 // Called when the game starts or when spawned
@@ -39,23 +40,7 @@ void AItem::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	RunningTime += DeltaTime;
-	
-	//float DeltaZ = Amplitude * FMath::Sin(RunningTime * TimeConstant);
 
-	//AddActorWorldOffset(FVector(0.f, 0.f, DeltaZ));
-
-
-
-	UWorld* World = GetWorld();
-	if (nullptr != World)
-	{
-		FVector Location = GetActorLocation();
-		FVector Direction = GetActorForwardVector();
-		DrawDebugSphere(World, Location, 25.f, 24, FColor::Red, false);
-		DrawDebugLine(World, Location, Location + Direction * 100.f, FColor::Red, false, -1.f, 0, 1.f);
-		DrawDebugPoint(World, Location, 15.f, FColor::Red, false, -1.f, 0);
-	}
-	UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime);
 }
 
 float AItem::TransformedSin()
